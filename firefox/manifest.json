@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "DHL Keep Session",
+  "version": "1.0.0",
+  "description": "Hace una petición silenciosa a Meine Sendungen cada 3 minutos mientras la pestaña esté abierta.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "dhl-keep-session@local.example",
+      "strict_min_version": "109.0"
+    }
+  },
+  "permissions": ["alarms", "tabs"],
+  "host_permissions": ["https://www.dhl.de/*"],
+  "background": {"scripts": ["background.js"]},
+  "content_scripts": [
+    {
+      "matches": ["https://www.dhl.de/de/privatkunden/kundenkonto/meine-sendungen.html*"],
+      "js": ["keepalive.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
